@@ -1,9 +1,11 @@
-````markdown
 # BufferZone
 
 **From alerts to decisions in seconds.**
 
-BufferZone is a working system that turns raw alerts, logs, and metrics into structured decisions.
+Most systems show you data.  
+BufferZone tells you what it means — and what to do next.
+
+---
 
 Instead of dashboards and manual analysis, it answers:
 
@@ -17,10 +19,12 @@ All in seconds.
 
 ## Demo
 
-Real-time run (no speed-up):
+This is a real run, not a simulation.
 
-▶️ [Play demo video](./demo.mp4)
+▶️ Watch demo:
 
+- Inline preview (fast): [Play demo](./demo_small.mp4)
+- Full quality: [Download video](./demo.mp4)
 Before an engineer reacts, the system already decided.
 
 ---
@@ -155,5 +159,24 @@ For a full project explanation, architecture, and current progress:
 
 ➡️ [Project Introduction](./docs/project-introduction.md)
 
+---
+
+## About
+
+This project is part of a larger effort to build a new kind of AI system:
+
+one that does not just generate text,  
+but makes decisions under uncertainty.
+
+Instead of generating text, the goal is to build an AI that can:
+
+- understand raw signals
+- evaluate uncertainty and boundaries
+- decide what is worth acting on
+- produce structured, explainable decisions
+
+BufferZone is the first working interface of that system.
+
+---
 ```
 ```
