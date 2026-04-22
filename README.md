@@ -1,13 +1,15 @@
+````markdown
 # BufferZone
 
 **From alerts to decisions in seconds.**
 
 BufferZone is a working system that turns raw alerts, logs, and metrics into structured decisions.
 
-Instead of dashboards and manual analysis, it provides:
-- what is real
-- what matters
-- what to do next
+Instead of dashboards and manual analysis, it answers:
+
+- what is real  
+- what matters  
+- what to do next  
 
 All in seconds.
 
@@ -17,19 +19,20 @@ All in seconds.
 
 Real-time run (no speed-up):
 
-👉 **Watch how the system makes a decision in seconds:**
-[▶️ Play demo video](./demo.mp4)
+▶️ [Play demo video](./demo.mp4)
+
 Before an engineer reacts, the system already decided.
+
 ---
 
 ## What it does
 
 Given raw system signals (alerts / logs / metrics), BufferZone generates:
 
-- structured judgment
-- propagation path
-- priority and action hints
-- evidence and boundaries
+- structured judgment  
+- propagation path  
+- priority and action hints  
+- evidence and boundaries  
 
 This is not a summary tool.
 
@@ -37,56 +40,120 @@ It is a **decision layer**.
 
 ---
 
-## Why this matters
-
-In real systems:
-
-- engineers scan dashboards
-- signals are noisy
-- decisions are slow and uncertain
-
-BufferZone reduces this to:
-
-> input → structured decision → action
-
----
-
 ## Stable Core AI
 
-At the core of BufferZone is a judgment engine called **Stable Core AI**.
+At the core of BufferZone is a structured judgment engine called **Stable Core AI**.
 
-It focuses on:
+It is not a chatbot and not a prompt wrapper.
 
-- material structuring
-- evidence-based reasoning
-- boundary control
-- decision generation
+It is designed to:
 
-It is designed to move beyond analysis,
-toward real decision-making systems.
+- ingest raw material  
+- structure it into decision-ready form  
+- distinguish signal from noise  
+- assign attention levels (observe / guarded / formal)  
+- produce a conclusion with reasoning and evidence boundaries  
 
----
-
-## Status
-
-This is an early working prototype.
-
-- real pipeline exists
-- real outputs generated
-- speed: seconds-level decision
+The goal is not to generate text, but to generate **decisions that can be used**.
 
 ---
 
-## Next
+## How it works (simplified)
 
-- more cases
-- better evaluation
-- learning layer integration
+```text
+raw input
+   ↓
+adapter (material structuring)
+   ↓
+builder (judgment construction)
+   ↓
+structured decision output
+````
+
+Example logic:
+
+```python
+if signal_is_noise:
+    gate = "observe_only"
+elif signal_is_uncertain:
+    gate = "guarded_attention"
+else:
+    gate = "formal_attention"
+```
 
 ---
 
-## Contact
+## Current status
 
-If you work on backend / infra / SRE and this looks interesting,
-feel free to reach out.# bufferzone
-From alerts to decisions in seconds. A real-time incident decision system powered by Stable Core AI.
+This is an early but real system.
+
+What already exists:
+
+* a working input → judgment → output pipeline
+* structured gating (formal / guarded / observe)
+* evidence-based decision output
+* residual control (reduced instability into known families)
+* contradiction semantics integrated into judgment path
+* initial learning layer (`learning_ingest_v1`) with controlled acceptance
+
+What is intentionally limited:
+
+* learning does not overwrite core judgment
+* no uncontrolled auto-training
+* core engine logic is not fully exposed
+
+---
+
+## Project structure
+
+The system has two parts:
+
+### BufferZone
+
+* input / integration layer
+* output / report / UI layer
+* product-facing shell
+
+### Stable Core AI
+
+* judgment engine
+* material structuring
+* decision construction
+* learning (controlled, early stage)
+
+---
+
+## Demo artifacts
+
+This repository includes:
+
+* `demotest.json` — example input
+* `demo.pdf` — generated report
+* `demo.mp4` — real-time run
+
+---
+
+## What this project is (and is not)
+
+This is:
+
+* a decision system
+* a structured judgment engine
+* an early but working pipeline
+
+This is not:
+
+* a chatbot wrapper
+* a dashboard tool
+* a prompt-only system
+
+---
+
+## Deeper overview
+
+For a full project explanation, architecture, and current progress:
+
+➡️ [Project Introduction](./docs/project-introduction.md)
+
+```
+```
