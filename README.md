@@ -40,17 +40,17 @@ Given raw system signals (alerts / logs / metrics), BufferZone generates:
 - priority and action hints  
 - evidence and boundaries  
 
-This is not a summary tool.
-
-It is a **decision layer**.
+This is not here to summarize.
+It is here to decide.
 
 ---
 
 ## Stable Core AI
 
-At the core of BufferZone is a structured judgment engine called **Stable Core AI**.
+BufferZone runs on a structured judgment engine called Stable Core AI.
 
-It is not a chatbot and not a prompt wrapper.
+It does not try to chat.  
+It decides.
 
 It is designed to:
 
@@ -60,7 +60,7 @@ It is designed to:
 - assign attention levels (observe / guarded / formal)  
 - produce a conclusion with reasoning and evidence boundaries  
 
-The goal is not to generate text, but to generate **decisions that can be used**.
+The goal is simple: generate decisions that can be used.
 
 ---
 
@@ -159,7 +159,7 @@ This is not:
 
 For a full project explanation, architecture, and current progress:
 
-➡️ [Project Introduction](./docs/project-introduction.md)
+Full project documentation coming soon.
 
 ---
 
