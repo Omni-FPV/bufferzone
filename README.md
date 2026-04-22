@@ -23,8 +23,10 @@ This is a real run, not a simulation.
 
 ▶️ Watch demo:
 
-- Inline preview (fast): [Play demo](./demo_small.mp4)
-- Full quality: [Download video](./demo.mp4)
+- Full demo video: [Download video](./demo.mp4)
+- Sample input: [demotest.json](./demotest.json)
+- Generated report: [demo.pdf](./demo.pdf)
+
 Before an engineer reacts, the system already decided.
 
 ---
@@ -178,5 +180,3 @@ Instead of generating text, the goal is to build an AI that can:
 BufferZone is the first working interface of that system.
 
 ---
-```
-```
