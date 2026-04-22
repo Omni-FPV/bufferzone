@@ -17,8 +17,9 @@ All in seconds.
 
 Real-time run (no speed-up):
 
-> (Video coming below)
-
+👉 **Watch how the system makes a decision in seconds:**
+[▶️ Play demo video](./demo.mp4)
+Before an engineer reacts, the system already decided.
 ---
 
 ## What it does
