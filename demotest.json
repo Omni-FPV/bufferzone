@@ -1,0 +1,261 @@
+{
+  "case_id": "incident_order_api_2026_04_22_001",
+  "case_type": "runtime_alert",
+  "service": "order-api",
+  "env": "prod",
+  "region": "cn-east-1",
+  "severity": "sev2",
+  "status": "resolved",
+  "started_at": "2026-04-22T06:48:00+12:00",
+  "ended_at": "2026-04-22T07:11:00+12:00",
+  "duration_minutes": 23,
+
+  "alert_summary": {
+    "title": "order-api latency spike and downstream pressure during traffic surge",
+    "source": "monitoring",
+    "incident_type": "latency_and_resource_pressure",
+    "root_service": "order-api"
+  },
+
+  "metrics": [
+    {
+      "name": "p99_latency_ms",
+      "value": 1380,
+      "unit": "ms",
+      "threshold": 500,
+      "comparator": ">",
+      "window": "5m",
+      "source": "apm"
+    },
+    {
+      "name": "error_ratio",
+      "value": 0.021,
+      "unit": "ratio",
+      "threshold": 0.01,
+      "comparator": ">",
+      "window": "5m",
+      "source": "apm"
+    },
+    {
+      "name": "active_connections",
+      "value": 187,
+      "unit": "count",
+      "threshold": 180,
+      "comparator": ">",
+      "window": "1m",
+      "source": "pool_monitor"
+    },
+    {
+      "name": "max_connections",
+      "value": 200,
+      "unit": "count",
+      "threshold": 200,
+      "comparator": ">=",
+      "window": "static",
+      "source": "pool_config"
+    },
+    {
+      "name": "connection_utilization_ratio",
+      "value": 0.935,
+      "unit": "ratio",
+      "threshold": 0.8,
+      "comparator": ">",
+      "window": "1m",
+      "source": "pool_monitor"
+    },
+    {
+      "name": "connection_utilization_ratio_derived",
+      "value": 0.935,
+      "unit": "ratio",
+      "threshold": 0.8,
+      "comparator": ">",
+      "window": "1m",
+      "source": "derived"
+    },
+    {
+      "name": "queue_depth",
+      "value": 1204,
+      "unit": "count",
+      "threshold": 800,
+      "comparator": ">",
+      "window": "1m",
+      "source": "runtime_queue"
+    },
+    {
+      "name": "retry_rate",
+      "value": 0.12,
+      "unit": "ratio",
+      "threshold": 0.05,
+      "comparator": ">",
+      "window": "5m",
+      "source": "gateway_metrics"
+    }
+  ],
+
+  "alerts": [
+    {
+      "alert_name": "order-api high p99 latency",
+      "level": "critical",
+      "status": "firing",
+      "fired_at": "2026-04-22T06:48:12+12:00",
+      "source": "apm",
+      "signal": "latency"
+    },
+    {
+      "alert_name": "order-api elevated error ratio",
+      "level": "critical",
+      "status": "firing",
+      "fired_at": "2026-04-22T06:49:01+12:00",
+      "source": "apm",
+      "signal": "error_rate"
+    },
+    {
+      "alert_name": "order-api connection pool saturation",
+      "level": "critical",
+      "status": "firing",
+      "fired_at": "2026-04-22T06:49:20+12:00",
+      "source": "pool_monitor",
+      "signal": "resource_pressure"
+    },
+    {
+      "alert_name": "order-api queue backlog high",
+      "level": "warning",
+      "status": "firing",
+      "fired_at": "2026-04-22T06:50:03+12:00",
+      "source": "runtime_queue",
+      "signal": "backlog"
+    },
+    {
+      "alert_name": "retry storm detected",
+      "level": "critical",
+      "status": "firing",
+      "fired_at": "2026-04-22T06:51:40+12:00",
+      "source": "gateway_metrics",
+      "signal": "retry_amplification"
+    }
+  ],
+
+  "service_relations": {
+    "root_service": "order-api",
+    "upstream_services": [
+      "checkout"
+    ],
+    "downstream_services": [
+      "payment"
+    ],
+    "related_resources": [
+      "payment-db",
+      "shared-redis"
+    ],
+    "topology_completeness": "partial"
+  },
+
+  "downstream_effects": [
+    {
+      "from_service": "checkout",
+      "to_service": "payment",
+      "effect_type": "latency_propagation",
+      "relation": "inferred",
+      "evidence_source": "structured_downstream_effect"
+    },
+    {
+      "from_service": "order-api",
+      "to_service": "checkout",
+      "effect_type": "impact_observed",
+      "relation": "structured_relation",
+      "evidence_source": "service_relation"
+    },
+    {
+      "from_service": "order-api",
+      "to_service": "payment-db",
+      "effect_type": "impact_observed",
+      "relation": "structured_relation",
+      "evidence_source": "service_relation"
+    }
+  ],
+
+  "logs": [
+    {
+      "timestamp": "2026-04-22T06:48:15+12:00",
+      "level": "WARN",
+      "component": "order-api",
+      "message": "p99 latency exceeded threshold",
+      "tags": ["latency", "apm"]
+    },
+    {
+      "timestamp": "2026-04-22T06:49:26+12:00",
+      "level": "ERROR",
+      "component": "db_pool",
+      "message": "connection pool usage near limit",
+      "tags": ["pool", "resource_pressure"]
+    },
+    {
+      "timestamp": "2026-04-22T06:50:52+12:00",
+      "level": "WARN",
+      "component": "retry_handler",
+      "message": "retry count increasing during downstream timeout window",
+      "tags": ["retry", "timeout"]
+    },
+    {
+      "timestamp": "2026-04-22T06:52:10+12:00",
+      "level": "ERROR",
+      "component": "payment_client",
+      "message": "downstream request timeout",
+      "tags": ["downstream", "payment", "timeout"]
+    }
+  ],
+
+  "facts": [
+    "p99 latency exceeded threshold",
+    "error ratio exceeded threshold",
+    "connection utilization exceeded threshold",
+    "queue depth exceeded threshold",
+    "retry rate exceeded threshold",
+    "downstream timeout signal observed",
+    "topology is partial"
+  ],
+
+  "root_cause_hint": [
+    "traffic surge during promotion window",
+    "connection pool saturation",
+    "retry amplification under downstream timeout",
+    "shared resource contention"
+  ],
+
+  "recovery": {
+    "recovered": true,
+    "recovery_actions": [
+      "temporary traffic throttling enabled",
+      "retry policy tightened",
+      "downstream timeout budget reduced",
+      "connection pool pressure relieved"
+    ],
+    "recovery_note": "service metrics returned to acceptable range after throttling and retry control"
+  },
+
+  "business_impact": {
+    "known": false,
+    "description": ""
+  },
+
+  "user_impact": {
+    "known": false,
+    "description": ""
+  },
+
+  "initial_fault_point": {
+    "known": false,
+    "description": ""
+  },
+
+  "evidence_boundary": {
+    "propagation_trace": "partial",
+    "missing_items": [
+      "full topology graph",
+      "complete parallel branch coverage",
+      "callback path verification",
+      "hidden dependency verification"
+    ],
+    "note": "current propagation judgment is based on observed structured downstream effects and related service relations only"
+  }
+}
